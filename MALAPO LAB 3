@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class StudentEnrollment {
+
+    // Method to calculate the total enrollment fee based on the number of units
+    public static double calculateTotalFee(int numberOfUnits) {
+        int feePerUnit = 1000;  // Each unit costs 1000
+        return numberOfUnits * feePerUnit;  // Calculate total fee by multiplying units by fee per unit
+    }
+
+    // Main method that executes the program
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        // Prompt user for student details
+        System.out.print("Enter Student Name: ");
+        String studentName = input.nextLine();  // Read student's name
+
+        System.out.print("Enter Course: ");
+        String course = input.nextLine();  // Read course name
+
+        System.out.print("Enter Course Code: ");
+        String courseCode = input.nextLine();  // Read course code
+
+        System.out.print("Enter Number of Units (max 10): ");
+        int numberOfUnits = input.nextInt();  // Read number of units
+
+        // Validate the entered number of units
+        if (numberOfUnits > 10 || numberOfUnits <= 0) {
+            System.out.println("Invalid number of units. Please enter between 1 and 10.");
+            return;  // Exit if the number of units is invalid
+        }
+
+        // Calculate the total enrollment fee based on valid units
+        double totalFee = calculateTotalFee(numberOfUnits);
+
+        // Display the student's name and the calculated total enrollment fee
+        System.out.println("\nStudent Name: " + studentName);
+        System.out.println("Total Enrollment Fee: " + totalFee);
+
+        // Prompt user for payment amount
+        System.out.print("\nEnter Payment Amount: ");
+        double payment = input.nextDouble();  // Read the payment amount
+
+        // Determine the payment status relative to the total fee
+        if (payment == totalFee) {
+            System.out.println("Fully Paid");  // Payment is exactly the total fee
+        } else if (payment < totalFee) {
+            System.out.println("Partial Payment. Amount Paid: " + payment);  // Payment is less than the total fee
+        } else {
+            System.out.println("Overpayment. You have paid more than the required fee.");  // Payment exceeds the total fee
+        }
+
+        // Close the scanner to prevent resource leaks
+        input.close();
+    }
+}
